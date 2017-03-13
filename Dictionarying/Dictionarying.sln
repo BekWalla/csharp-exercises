@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BFDEFFF3-3F9D-49B7-8A45-A802AF512614}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9F57491B-006D-40AC-9641-83D079F79241}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Dictionarying", "src\Dictionarying\Dictionarying.xproj", "{F207CE36-9063-44FB-8B87-8E029AB0BE39}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F207CE36-9063-44FB-8B87-8E029AB0BE39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F207CE36-9063-44FB-8B87-8E029AB0BE39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F207CE36-9063-44FB-8B87-8E029AB0BE39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F207CE36-9063-44FB-8B87-8E029AB0BE39}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F207CE36-9063-44FB-8B87-8E029AB0BE39} = {BFDEFFF3-3F9D-49B7-8A45-A802AF512614}
+	EndGlobalSection
+EndGlobal

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace GradebookDict
 {
@@ -28,11 +29,12 @@ namespace GradebookDict
             while (newStudent != "");
 
             // Print class roster
-            Console.WriteLine("\nClass roster:");
+            StringBuilder MyStringBuilder = new StringBuilder("\nClass Roster: ");
             foreach (KeyValuePair<string, double> student in students)
             {
-                Console.WriteLine(student.Key + " (" + student.Value + ")");
+                MyStringBuilder.Append(student.Key + " (" + student.Value + ") ;");
             }
+            Console.WriteLine(MyStringBuilder);
 
             double sum = students.Values.Sum();
             double avg = sum / students.Count;
