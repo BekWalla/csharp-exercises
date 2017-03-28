@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using CheeseMVC.Models;
+using CheeseMVC.ViewModels;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -14,40 +16,88 @@ namespace CheeseMVC.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
-            List<string> cheeses = new List<string>();
+            List<Cheese> cheeses = CheeseData.GetAll();
 
-            ViewBag.cheeses = Cheeses;
-            return View();
+            ViewBag.cheeses = CheeseData.GetAll();
+            return View(cheeses);
         }
 
         public IActionResult Add()
         {
-            return View();
+            AddCheeseViewModel addCheeseViewModel = new AddCheeseViewModel();
+            return View(addCheeseViewModel);
         }
 
         [HttpPost]
         [Route("/Cheese/Add")]
-        public IActionResult NewCheese(string name, string description)
+        public IActionResult Add(AddCheeseViewModel addCheeseViewModel)
         {
-            //Add the new cheese
-            Cheeses.Add(name, description);
+            if (ModelState.IsValid)
+            {
+                //Add the new cheese
+                Cheese newCheese = new Models.Cheese
+                {
+                    Name = addCheeseViewModel.Name,
+                    Description = addCheeseViewModel.Description,
+                    Type = addCheeseViewModel.Type
+                };
+                CheeseData.Add(newCheese);
+                return Redirect("/Cheese");
+            }
+            return View(addCheeseViewModel);
+
+        }
+        [Route("/cheese/remove")]
+        [HttpGet]
+        public IActionResult Remove()
+        {
+            ViewBag.title = "Remove Cheeses";
+            ViewBag.cheeses = CheeseData.GetAll();
+            return View();
+        }
+
+        [Route("/cheese/remove")]
+        [HttpPost]
+        public IActionResult RemoveManyCheeses(int[] cheeseIds)
+        {
+            foreach (int submittedCheeseId in cheeseIds)
+            {
+                // remove cheese from cheeses by using LINQ to extract
+                // the specific cheese by CheeseId
+                CheeseData.Remove(submittedCheeseId);
+            }
+
+            return Redirect("/cheese");
+        }
+
+        [Route("/cheese/remove/{cheeseId}")]
+        [HttpGet]
+        public IActionResult RemoveSingleCheese(int cheeseId)
+        {
+            // remove cheese from cheeses by using LINQ to extract
+            // the specific cheese by CheeseId
+            CheeseData.Remove(cheeseId);
+
             return Redirect("/Cheese");
         }
 
-        public IActionResult Remove()
+        [Route("/Cheese/edit")]
+        [HttpGet]
+        public IActionResult Edit(int cheeseId)
         {
-            ViewBag.cheeses = Cheeses;
+            ViewBag.error = "";
+            ViewBag.cheese = CheeseData.GetById(cheeseId);
             return View();
         }
+
+        [Route("/cheese/edit")]
         [HttpPost]
-        [Route("/Cheese/Remove")]
-        public IActionResult RemoveCheese(string cheese = "")
+        public IActionResult Edit(int cheeseId, string name, string description)
         {
-            if (Cheeses.ContainsKey(cheese))
-            {
-                Cheeses.Remove(cheese);
-            }
-            return Redirect("/Cheese");
+            Cheese cheese = CheeseData.GetById(cheeseId);
+            cheese.Name = name;
+            cheese.Description = description;
+            return Redirect("/cheese");
         }
     }
 }

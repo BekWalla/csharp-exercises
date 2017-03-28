@@ -39,12 +39,46 @@ namespace School.Controllers
             }
             public void AddGrade(int courseCredits, double grade)
             {
-                // Update the appropriate properties: NumberOfCredits, Gpa
+                double gpa = Gpa.Student;
+                double numberOfCredits = Value.NumberOfCredits;
+                double totalQualityScore = (gpa * numberOfCredits);
+                double qualityScore = (grade * courseCredits);
+                totalQualityScore = (totalQualityScore + qualityScore);
+                numberOfCredits = (numberOfCredits + courseCredits);
+                numberOfCredits = 
+                gpa = (totalQualityScore / numberofCredits);
+                gpa = set Student.Gpa()
             }
-
             public string GetGradeLevel()
             {
-                // Determine the grade level of the student based on NumberOfCredits
+                numberOfCredits = get Student.NumberOfCredits();
+                if (numberOfCredits < 30)
+                {
+                    return "Freshman"
+                }
+                if (numberOfCredits > 29 && numberOfCredits < 60)
+                {
+                    return "Sophomore"
+                }
+                if (numberOfCredits > 59 && numberOfCredits < 90)
+                {
+                    return "Junior"
+                }
+                if (numberOfCredits > 89
+                {
+                    return "Senior"
+                }
+            }
+
+            public override String ToString()
+            {
+                return Name + " (Credits: " + NumberOfCredits + ", GPA: " + Gpa + ")";
+            }
+
+            public override bool Equals(object obj)
+            {
+                Student other = obj as Student;
+                return other.StudentId == StudentId;
             }
         }
         public class Course

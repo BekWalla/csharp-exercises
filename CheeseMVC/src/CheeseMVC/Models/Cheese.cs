@@ -2,25 +2,28 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace CheeseMVC.Models
 {
     public class Cheese
     {
-        private string name;
-
-    
-        public string Name
-        {
-            get { return name; }
-            set { name = value.ToUpper(); }
-        }
+        public int CheeseId { get; set; }
+        public string Name { get; set; }
         public string Description { get; set; }
+        public CheeseType Type { get; set; }
 
-        public Cheese(string name, string description)
+        private static int nextId = 1;
+
+        private static readonly Regex validCheeseNamePattern = new Regex(@"[a-zA-Z\s]+");
+
+        public Cheese()
         {
-            Name = name;
-            Description = description;
+            // default constructor is required for model
+            // binding in controllers
+
+            CheeseId = nextId;
+            nextId += 1;
         }
     }
 }
